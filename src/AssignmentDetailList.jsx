@@ -14,7 +14,7 @@ const AssignmentDetailList = (props) => {
     <>
       <SecondaryCard>
         <div className="sm:px-16 mx-5 py-5 space-y-5">
-          {assignmentData.map((assignment) => (
+          {assignmentData.filter((assignment) => (
             <AssignmentDetailCard
               assignment={assignment}
             ></AssignmentDetailCard>
