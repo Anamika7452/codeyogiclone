@@ -5,7 +5,7 @@ import { BiLink } from "react-icons/bi";
 import MyLink from "./MyLink";
 import Button from "./Button";
 
-const NotfoundPage = (props) => {
+const NotFoundPage = () => {
   return (
     <>
       <div className="h-screen bg-black flex justify-center items-center ">
@@ -27,4 +27,4 @@ const NotfoundPage = (props) => {
     </>
   );
 };
-export default NotfoundPage;
+export default NotFoundPage;
