@@ -28,7 +28,6 @@ const App = () => {
               <Route path="profile" element={<Profile />} />
             </Route>
             <Route path="quiz" element={<Quiz />} />
-            <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
       </BrowserRouter>
