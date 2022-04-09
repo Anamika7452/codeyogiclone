@@ -4,7 +4,6 @@ import LecturesList from "./LecturesList";
 import Quiz from "./Quiz";
 import Profile from "./Profile";
 import MainLayout from "./MainLayout";
-import NotFoundPage from "./NotFoundPage";
 import AssignmentDetailList from "./AssignmentDetailList";
 
 import { Navigate, BrowserRouter, Routes, Route } from "react-router-dom";
