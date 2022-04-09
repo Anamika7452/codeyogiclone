@@ -20,7 +20,7 @@ const App = () => {
               <Route path="assignments" element={<AssignmentsList />} />
 
               <Route
-                path="assignments/:assignmentNumber/details"
+                path="assignments/:id/details"
                 element={<AssignmentDetailList />}
               />
 

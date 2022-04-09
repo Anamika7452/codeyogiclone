@@ -4,8 +4,6 @@ import SecondaryCard from './SecondaryCard'
 import AssignmentCard from './AssignmentCard'
 import assignmentData from './MockData/assignments';
 
- console.log(`assignmentData`, assignmentData[0] )
-
 const AssignmentsList = props => {
 	return (
 			<>

@@ -2,10 +2,7 @@ import React from "react";
 import H1 from "./H1";
 import LectureCard from "./LectureCard";
 import SecondaryCard from "./SecondaryCard";
-import Card from "./Card";
 import lecutreData from "./MockData/lectures";
-
-console.log(`lectureData`, lecutreData[0]);
 
 const LecturesList = (props) => {
   return (

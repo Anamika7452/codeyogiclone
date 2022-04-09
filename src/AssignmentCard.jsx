@@ -5,13 +5,11 @@ import Card from "./Card";
 import { GrCloudDownload } from "react-icons/gr";
 import assignmentData from "./MockData/assignments";
 
-console.log("assignmentDatacard", assignmentData);
-
 const AssignmentCard = (props) => {
   return (
     <div>
       <div>
-        <MyLink to="/assignments/:assignmentNumber/details">
+        <MyLink to={`/assignments/${props.assignment.id}/details`}>
           <Card>
             <div className="flex space-x-5">
               <div className="flex space-x-2">
