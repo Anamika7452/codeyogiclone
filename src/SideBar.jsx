@@ -9,8 +9,8 @@ import { AiOutlineCloseCircle } from "react-icons/ai";
 const SideBar = (props) => {
   return (
     <div className={props.onClick}>
-      <div className=" bg-gray-800 space-y-4 w-48 p-5 sm:py-2 sm:w-60 flex flex-col justify-between  h-screen sticky top-0 ">
-        <div className="sm:hidden block text-3xl text-white absolute top-0 left-40">
+      <div className=" bg-gray-800 space-y-4 w-80 p-5 sm:py-2 sm:w-60 flex flex-col justify-between  h-screen sticky top-0 ">
+        <div className="sm:hidden block text-3xl text-white absolute top-0 left-72 sm:left-40">
           <AiOutlineCloseCircle onClick={props.onChange} />
         </div>
         <div>

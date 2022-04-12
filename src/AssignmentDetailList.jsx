@@ -17,10 +17,12 @@ const AssignmentDetailList = (props) => {
   return (
     <>
       <SecondaryCard>
-        <div className="sm:px-16 mx-5 py-5 space-y-5 ">
-          <AssignmentDetailCard
-            selectedAssignment={selectedAssignment}
-          ></AssignmentDetailCard>
+        <div className="mt-20">
+          <div className="sm:px-16 mx-5 py-5 space-y-5 ">
+            <AssignmentDetailCard
+              selectedAssignment={selectedAssignment}
+            ></AssignmentDetailCard>
+          </div>
         </div>
       </SecondaryCard>
     </>
