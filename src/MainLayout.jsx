@@ -2,7 +2,6 @@ import React from "react";
 import SideBar from "./SideBar";
 import H1 from "./H1";
 import { Outlet } from "react-router-dom";
-import { GoThreeBars } from "react-icons/go";
 import Hemburger from "./Hemburger";
 
 const MainLayout = (props) => {
@@ -24,7 +23,7 @@ const MainLayout = (props) => {
           <SideBar />
         </div>
 
-        <div className="block sm:hidden absolute">
+        <div className="block sm:hidden h-screen fixed">
           {!sideBarVisibility && <Hemburger onClick={sideBarVisible} />}
 
           {sideBarVisibility && (

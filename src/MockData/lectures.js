@@ -42,6 +42,16 @@ const lecutreData = [
     ],
     RecordingUrl: 'https://youtu.be/8N_Yro5QeCE" target="_blank',
   },
+  {
+    id: 30,
+    UplodedDate: "(Thu Mar 22 2022)",
+    Duration: "Duration: 03:19:25",
+    Topics: [
+      "How routing works in React app.",
+      "How websites work on internet. i.e. things like domain, IP address, hosting, servers etc.",
+    ],
+    RecordingUrl: 'https://youtu.be/8N_Yro5QeCE" target="_blank',
+  },
 ];
 
 export default lecutreData;
