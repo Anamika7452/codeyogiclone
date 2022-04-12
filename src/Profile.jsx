@@ -9,7 +9,7 @@ import Button from "./Button";
 const Profile = (props) => {
   return (
     <>
-      <div>
+      <div className="mt-20 sm:mt-0">
         <SecondaryCard>
           <div className="p-5">
             <H1>Personal details</H1>
