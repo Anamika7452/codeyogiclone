@@ -31,7 +31,7 @@ const MainLayout = (props) => {
             <SideBar onChange={sideBarNotVisible} onClick={sideBarVisible} />
           )}
         </div>
-        <div className="sm:flex-grow sm:p-20 px-2 py-2 bg-gray-200 space-y-4">
+        <div className="sm:flex-grow sm:p-20 px-2 py-2 h-fit bg-gray-200 space-y-4">
           <Outlet />
         </div>
       </div>

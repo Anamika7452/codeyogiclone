@@ -2,8 +2,7 @@ import React from "react";
 import H3 from "./H3";
 import MyLink from "./MyLink";
 import Card from "./Card";
-import { GrCloudDownload } from "react-icons/gr";
-import assignmentData from "./MockData/assignments";
+import { TiTickOutline } from "react-icons/ti";
 
 const AssignmentCard = (props) => {
   return (
@@ -27,6 +26,17 @@ const AssignmentCard = (props) => {
             <h1 className="text-sm text-red-500">
               Due Date:{props.assignment.DueDate}
             </h1>
+            <div>
+              <h1 className="text-red-500 text-sm font-bold mt-5">
+                Not Submitted
+              </h1>
+              <div className="mt-5 space-x-2 flex justify-center">
+                <div className="text-lg text-green-500 ">
+                  <TiTickOutline></TiTickOutline>
+                </div>
+                <h1 className="text-green-500 text-sm text-center ">Submit</h1>
+              </div>
+            </div>
           </Card>
         </MyLink>
       </div>
