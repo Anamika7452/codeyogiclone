@@ -15,7 +15,9 @@ const StudentList = () => {
   return (
     <div>
       <div>
-        <h1 className="text-5xl text-center font-semibold ">Students List</h1>
+        <h1 className="text-3xl sm:text-5xl text-center font-semibold mt-5">
+          Students List
+        </h1>
       </div>
       <div className="sm:flex justify-center flex-wrap">
         {students.map((s) => (
