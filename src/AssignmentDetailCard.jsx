@@ -6,7 +6,7 @@ import assignmentData from "./MockData/assignments";
 
 const AssignmentDetailCard = (props) => {
   return (
-    <div className="p-4">
+    <div className="rounded-md border-black border">
       <Card>
         <div className="space-y-5">
           <h1 className="text-xl font-medium">Assignment details</h1>
