@@ -1,7 +1,11 @@
 import React from "react";
 import MyLink from "./MyLink";
 import { SiAirplayvideo } from "react-icons/si";
-import { MdOutlineAssignmentLate, MdOutlineQuiz } from "react-icons/md";
+import {
+  MdOutlineAssignmentLate,
+  MdOutlineQuiz,
+  MdPeopleOutline,
+} from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
@@ -46,6 +50,18 @@ const SideBar = (props) => {
                 <MdOutlineQuiz />
               </div>
               <div>Quiz</div>
+            </div>
+          </MyLink>
+
+          <MyLink to="/students">
+            <div
+              className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md"
+              onClick={props.onChange}
+            >
+              <div className="text-white text-2xl">
+                <MdPeopleOutline />
+              </div>
+              <div>Students</div>
             </div>
           </MyLink>
         </div>

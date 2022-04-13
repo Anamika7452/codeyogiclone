@@ -16,7 +16,7 @@ const AssignmentDetailList = (props) => {
 
   return (
     <>
-      <div className="bg-gray-200 h-screen">
+      <div className="bg-gray-200">
         <div className="mt-20 sm:mt-0">
           <div className="sm:px-16  sm:mx-5 mx-0 py-5 space-y-5 ">
             <AssignmentDetailCard
