@@ -7,7 +7,6 @@ import SecondaryCard from "./SecondaryCard";
 
 const LecturesList = (props) => {
   const [lectures, setLectures] = useState([]);
-  // const [page, setPage] = useState([]);
 
   useEffect(() => {
     const assignmentDetailData = axios.get(

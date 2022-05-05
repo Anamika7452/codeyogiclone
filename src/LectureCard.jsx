@@ -8,9 +8,8 @@ import { DateTime } from "luxon";
 const LecutreCard = (props) => {
   const lectureDateString = props.lecture.created_at;
   const lectureDateObject = DateTime.fromISO(lectureDateString);
-  const lectureDateHumanReadableForm = lectureDateObject.toLocaleString(
-    DateTime.DATE_MED_WITH_WEEKDAY
-  );
+  const lectureDateHumanReadableForm =
+    lectureDateObject.toFormat("ccc LLL dd y");
   return (
     <Card>
       <div className="flex space-x-5 ">

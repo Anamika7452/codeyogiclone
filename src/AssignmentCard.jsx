@@ -39,43 +39,45 @@ const AssignmentCard = (props) => {
     assignmentUplodedDateString
   );
   const assignmentUplodedDateHumanReadableForm =
-    asignmentUplodedDateObject.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
+    asignmentUplodedDateObject.toFormat("ccc LLL dd y");
 
   const assignmentDueDateString = props.assignment.due_date;
   const assignmentDueDateObject = DateTime.fromISO(assignmentDueDateString);
   const assignmentDueDateHumanReadableForm =
-    assignmentDueDateObject.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
+    assignmentDueDateObject.toFormat("ccc LLL dd y");
 
   let navigate = useNavigate();
 
   return (
     <div>
       <div>
-        <Card
-          onClick={() =>
-            navigate(`/assignments/${props.assignment.id}/details`)
-          }
-        >
-          <div className="flex space-x-5">
-            <div className="flex space-x-2">
-              <h1 className="text-sm font-medium text-black">
-                #{props.assignment.id}
-              </h1>
-              <div className="sm:flex sm:space-x-5">
+        <Card>
+          <div
+            onClick={() =>
+              navigate(`/assignments/${props.assignment.id}/details`)
+            }
+          >
+            <div className="flex space-x-5">
+              <div className="flex space-x-2">
                 <h1 className="text-sm font-medium text-black">
-                  {props.assignment.title}
+                  #{props.assignment.id}
                 </h1>
-                <H3>({assignmentUplodedDateHumanReadableForm})</H3>
+                <div className="sm:flex sm:space-x-5">
+                  <h1 className="text-sm font-medium text-black">
+                    {props.assignment.title}
+                  </h1>
+                  <H3>({assignmentUplodedDateHumanReadableForm})</H3>
+                </div>
               </div>
             </div>
-          </div>
-          <h1 className="text-sm text-red-500">
-            Due Date : {assignmentDueDateHumanReadableForm}
-          </h1>
-          <div>
-            <h1 className="text-red-500 text-sm font-bold mt-5">
-              Not Submitted
+            <h1 className="text-sm text-red-500">
+              Due Date : {assignmentDueDateHumanReadableForm}
             </h1>
+            <div>
+              <h1 className="text-red-500 text-sm font-bold mt-5">
+                Not Submitted
+              </h1>
+            </div>
           </div>
           <button onClick={Showpopup} className="mt-5 space-x-2 flex mx-auto">
             <div className="text-lg text-green-500 ">
