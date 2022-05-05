@@ -6,6 +6,7 @@ import Button from "./Button";
 import { TiTickOutline } from "react-icons/ti";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { DateTime } from "luxon";
 
 const AssignmentCard = (props) => {
   const [showPopup, updatePopoup] = useState(false);
@@ -33,6 +34,17 @@ const AssignmentCard = (props) => {
     );
     console.log("hello");
   };
+  const assignmentUplodedDateString = props.assignment.updated_at;
+  const asignmentUplodedDateObject = DateTime.fromISO(
+    assignmentUplodedDateString
+  );
+  const assignmentUplodedDateHumanReadableForm =
+    asignmentUplodedDateObject.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
+
+  const assignmentDueDateString = props.assignment.due_date;
+  const assignmentDueDateObject = DateTime.fromISO(assignmentDueDateString);
+  const assignmentDueDateHumanReadableForm =
+    assignmentDueDateObject.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
 
   let navigate = useNavigate();
 
@@ -53,12 +65,12 @@ const AssignmentCard = (props) => {
                 <h1 className="text-sm font-medium text-black">
                   {props.assignment.title}
                 </h1>
-                <H3>{props.assignment.updated_at}</H3>
+                <H3>({assignmentUplodedDateHumanReadableForm})</H3>
               </div>
             </div>
           </div>
           <h1 className="text-sm text-red-500">
-            Due Date:{props.assignment.due_date}
+            Due Date : {assignmentDueDateHumanReadableForm}
           </h1>
           <div>
             <h1 className="text-red-500 text-sm font-bold mt-5">

@@ -5,6 +5,7 @@ import Card from "./Card";
 import Button from "./Button";
 import MDEditor from "@uiw/react-md-editor";
 import axios from "axios";
+import { DateTime } from "luxon";
 
 const AssignmentDetailCard = (props) => {
   const [showPopup, updatePopoup] = useState(false);
@@ -29,6 +30,11 @@ const AssignmentDetailCard = (props) => {
       { withCredentials: true }
     );
   };
+  const assignmentDueDateString = props.selectedAssignment.due_date;
+  const assignmentDueDateObject = DateTime.fromISO(assignmentDueDateString);
+  const assignmentDueDateHumanReadableForm =
+    assignmentDueDateObject.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
+
   return (
     <div className="rounded-md border-black border">
       <Card>
@@ -41,7 +47,7 @@ const AssignmentDetailCard = (props) => {
           <hr className="bt-2" />
           <div className="flex justify-between text-sm ">
             <H3>DueDate</H3>
-            <h1>{props.selectedAssignment.due_date}</h1>
+            <h1>{assignmentDueDateHumanReadableForm}</h1>
           </div>
           <hr className="bt-2" />
           <div className="flex justify-between space-x-16 text-sm ">

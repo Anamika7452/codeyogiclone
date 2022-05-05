@@ -17,7 +17,6 @@ const LecturesList = (props) => {
       }
     );
     assignmentDetailData.then((response) => {
-      console.log(`lecutredetail`, response.data);
       setLectures(response.data);
     });
   }, []);
