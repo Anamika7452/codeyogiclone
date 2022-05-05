@@ -1,11 +1,11 @@
 import React from "react";
 import H3 from "./H3";
 import { useState } from "react";
-import MyLink from "./MyLink";
 import Card from "./Card";
 import Button from "./Button";
 import { TiTickOutline } from "react-icons/ti";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const AssignmentCard = (props) => {
   const [showPopup, updatePopoup] = useState(false);
@@ -34,33 +34,37 @@ const AssignmentCard = (props) => {
     console.log("hello");
   };
 
+  let navigate = useNavigate();
+
   return (
     <div>
       <div>
-        <Card>
-          <MyLink to={`/assignments/${props.assignment.id}/details`}>
-            <div className="flex space-x-5">
-              <div className="flex space-x-2">
+        <Card
+          onClick={() =>
+            navigate(`/assignments/${props.assignment.id}/details`)
+          }
+        >
+          <div className="flex space-x-5">
+            <div className="flex space-x-2">
+              <h1 className="text-sm font-medium text-black">
+                #{props.assignment.id}
+              </h1>
+              <div className="sm:flex sm:space-x-5">
                 <h1 className="text-sm font-medium text-black">
-                  #{props.assignment.id}
+                  {props.assignment.title}
                 </h1>
-                <div className="sm:flex sm:space-x-5">
-                  <h1 className="text-sm font-medium text-black">
-                    {props.assignment.title}
-                  </h1>
-                  <H3>{props.assignment.updated_at}</H3>
-                </div>
+                <H3>{props.assignment.updated_at}</H3>
               </div>
             </div>
-            <h1 className="text-sm text-red-500">
-              Due Date:{props.assignment.due_date}
+          </div>
+          <h1 className="text-sm text-red-500">
+            Due Date:{props.assignment.due_date}
+          </h1>
+          <div>
+            <h1 className="text-red-500 text-sm font-bold mt-5">
+              Not Submitted
             </h1>
-            <div>
-              <h1 className="text-red-500 text-sm font-bold mt-5">
-                Not Submitted
-              </h1>
-            </div>
-          </MyLink>
+          </div>
           <button onClick={Showpopup} className="mt-5 space-x-2 flex mx-auto">
             <div className="text-lg text-green-500 ">
               <TiTickOutline></TiTickOutline>

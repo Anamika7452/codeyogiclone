@@ -9,8 +9,10 @@ import {
 import { CgProfile } from "react-icons/cg";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineCloseCircle } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const SideBar = (props) => {
+  let navigate = useNavigate();
   return (
     <div className={props.onClick}>
       <div className=" bg-gray-800 space-y-4 w-80 p-5 sm:py-2 sm:w-60 flex flex-col justify-between  h-screen sticky top-0 ">
@@ -19,7 +21,7 @@ const SideBar = (props) => {
         </div>
         <div>
           <h1 className="text-3xl font-extrabold text-white ">CODEYOGI</h1>
-          <MyLink to="/lectures">
+          <div onClick={() => navigate(`/lectures`)}>
             <div
               onClick={props.onChange}
               className="flex space-x-2 mt-5 hover:bg-gray-900 p-2 rounded-md"
@@ -27,10 +29,10 @@ const SideBar = (props) => {
               <div className="text-white text-xl">
                 <SiAirplayvideo />
               </div>
-              <div>Lectures</div>
+              <div className="text-white text-sm font-bold">Lectures</div>
             </div>
-          </MyLink>
-          <MyLink to="/assignments">
+          </div>
+          <div onClick={() => navigate(`/assignments`)}>
             <div
               onClick={props.onChange}
               className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md"
@@ -38,10 +40,10 @@ const SideBar = (props) => {
               <div className="text-white text-xl ">
                 <MdOutlineAssignmentLate />
               </div>
-              <div>Assignments</div>
+              <div className="text-white text-sm font-bold">Assignments</div>
             </div>
-          </MyLink>
-          <MyLink to="/quiz">
+          </div>
+          <div onClick={() => navigate(`/quiz`)}>
             <div
               onClick={props.onChange}
               className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md"
@@ -49,11 +51,11 @@ const SideBar = (props) => {
               <div className="text-white text-xl">
                 <MdOutlineQuiz />
               </div>
-              <div>Quiz</div>
+              <div className="text-white text-sm font-bold">Quiz</div>
             </div>
-          </MyLink>
+          </div>
 
-          <MyLink to="/students">
+          <div onClick={() => navigate(`/students`)}>
             <div
               className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md"
               onClick={props.onChange}
@@ -61,12 +63,12 @@ const SideBar = (props) => {
               <div className="text-white text-2xl">
                 <MdPeopleOutline />
               </div>
-              <div>Students</div>
+              <div className="text-white text-sm font-bold">Students</div>
             </div>
-          </MyLink>
+          </div>
         </div>
         <div>
-          <MyLink to="/profile">
+          <div onClick={() => navigate(`/profile`)}>
             <div
               onClick={props.onChange}
               className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md"
@@ -74,15 +76,15 @@ const SideBar = (props) => {
               <div className="text-white text-xl">
                 <CgProfile />
               </div>
-              <div>Profile</div>
+              <div className="text-white text-sm font-bold">Profile</div>
             </div>
-          </MyLink>
+          </div>
           <a href="https://codeyogi.io/" target="_blank">
             <div className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md">
               <div className="text-white text-xl">
                 <BiLogOut />
               </div>
-              <div className="text-white font-bold">Logout</div>
+              <div className="text-white text-sm font-bold">Logout</div>
             </div>
           </a>
         </div>
