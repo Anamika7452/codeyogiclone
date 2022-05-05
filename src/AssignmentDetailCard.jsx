@@ -18,14 +18,16 @@ const AssignmentDetailCard = (props) => {
     updatePopoup(false);
   };
 
+  const onInputChange = (event) => {
+    setSubmissionLink(event.target.value);
+  };
+
   const submitAssignment = () => {
     axios.put(
-      `httpa://api.codeyogi.io/${props.selectedAssignment.id}/submit `,
+      `https://api.codeyogi.io/assignment/${props.selectedAssignment.id}/submit `,
       { submissionLink },
       { withCredentials: true }
     );
-    setSubmissionLink(submissionLink);
-    console.log(`submissionLink`, submissionLink);
   };
   return (
     <div className="rounded-md border-black border">
@@ -54,21 +56,24 @@ const AssignmentDetailCard = (props) => {
         </div>
       </Card>
       {showPopup && (
-        <div className="absolute p-5 w-96 rounded-md bg-gray-200 space-y-4">
-          <hr className="bt-2" />
-          <div className="flex space-x-7">
-            <H3> Submission Link</H3>
-            <input
-              value={submissionLink}
-              onChange={submitAssignment}
-              className="p-2 rounded-md border border-indigo-500"
-              type="text"
-            />
-          </div>
-          <hr className="bt-2" />
-          <div className="space-x-4">
-            <Button>Submit</Button>
-            <Button onClick={Hidepopup}>close</Button>
+        <div className="h-screen absolute flex -translation-x-1/2 -translation-y-1/2 top-1/2 left-1/2">
+          <div className="absolute p-5 w-96 rounded-md bg-gray-200 space-y-4">
+            <hr className="bt-2" />
+            <div className="flex space-x-7">
+              <H3> Submission Link</H3>
+              <input
+                value={submissionLink}
+                onChange={onInputChange}
+                className="p-2 rounded-md border border-indigo-500"
+                type="text"
+              />
+            </div>
+            <hr className="bt-2" />
+            <div className="space-x-4">
+              <Button onClick={submitAssignment}>Submit</Button>
+
+              <Button onClick={Hidepopup}>close</Button>
+            </div>
           </div>
         </div>
       )}
