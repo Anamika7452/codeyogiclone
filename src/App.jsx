@@ -7,7 +7,7 @@ import MainLayout from "./MainLayout";
 import NotFoundPage from "./NotFoundPage";
 import AssignmentDetailList from "./AssignmentDetailList";
 import StudentList from "./StudentList";
-
+import LoginPage from "./LoginPage";
 import { Navigate, BrowserRouter, Routes, Route } from "react-router-dom";
 
 const App = () => {
@@ -30,6 +30,7 @@ const App = () => {
               <Route path="students" element={<StudentList />} />
             </Route>
             <Route path="quiz" element={<Quiz />} />
+            <Route path="logout" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>

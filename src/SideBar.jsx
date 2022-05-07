@@ -1,5 +1,4 @@
 import React from "react";
-import MyLink from "./MyLink";
 import { SiAirplayvideo } from "react-icons/si";
 import {
   MdOutlineAssignmentLate,
@@ -79,14 +78,17 @@ const SideBar = (props) => {
               <div className="text-white text-sm font-bold">Profile</div>
             </div>
           </div>
-          <a href="https://codeyogi.io/" target="_blank">
-            <div className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md">
+          <div onClick={() => navigate(`/logout`)}>
+            <div
+              onClick={props.onChange}
+              className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md"
+            >
               <div className="text-white text-xl">
                 <BiLogOut />
               </div>
               <div className="text-white text-sm font-bold">Logout</div>
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>

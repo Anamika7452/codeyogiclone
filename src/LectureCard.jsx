@@ -10,13 +10,24 @@ const LecutreCard = (props) => {
   const lectureDateObject = DateTime.fromISO(lectureDateString);
   const lectureDateHumanReadableForm =
     lectureDateObject.toFormat("ccc LLL dd y");
+  const start_time = new Date(props.lecture.start_time);
+  const end_time = new Date(props.lecture.end_time);
+  const diff = end_time - start_time;
+  const timeInHumanReadableFormString = new Date(diff).toISOString();
+  const timeInHumanReadableForm = timeInHumanReadableFormString.substring(
+    11,
+    19
+  );
   return (
     <Card>
       <div className="flex space-x-5 ">
         <h1 className="text-sm font-medium">Lecture#{props.lecture.id}</h1>
         <H3>({lectureDateHumanReadableForm})</H3>
       </div>
-      <H3>{props.lecture.Duration}</H3>
+      <div>
+        <H3>Duration : {timeInHumanReadableForm}</H3>
+      </div>
+
       <div className="text-sm font-medium mx-8 mt-8">
         <MDEditor.Markdown
           className="!bg-white markdown !text-black"
