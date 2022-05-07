@@ -7,10 +7,13 @@ import { TiTickOutline } from "react-icons/ti";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { DateTime } from "luxon";
+import Input from "./Input";
+import { string } from "yup";
 
 const AssignmentCard = (props) => {
   const [showPopup, updatePopoup] = useState(false);
   const [submissionLink, setSubmissionLink] = useState("");
+  const [submissionLinkError, setSubmissionLinkError] = useState("");
 
   const Showpopup = () => {
     updatePopoup(true);
@@ -27,12 +30,20 @@ const AssignmentCard = (props) => {
   };
 
   const submitAssignment = () => {
+    const urlValidator = string().url("url is not valid");
+    try {
+      urlValidator.validateSync(submissionLink);
+      setSubmissionLinkError("");
+    } catch (e) {
+      setSubmissionLinkError(e.message);
+      return;
+    }
     axios.put(
       `https://api.codeyogi.io/assignment/${props.assignment.id}/submit `,
       { submissionLink },
       { withCredentials: true }
     );
-    console.log("hello");
+    setSubmissionLink("");
   };
   const assignmentUplodedDateString = props.assignment.updated_at;
   const asignmentUplodedDateObject = DateTime.fromISO(
@@ -95,7 +106,8 @@ const AssignmentCard = (props) => {
                 <hr className="bt-2" />
                 <div className="flex space-x-7">
                   <H3> Submission Link</H3>
-                  <input
+                  <Input
+                    error={submissionLinkError}
                     value={submissionLink}
                     onChange={onInputChange}
                     className="p-2 rounded-md border border-indigo-500"

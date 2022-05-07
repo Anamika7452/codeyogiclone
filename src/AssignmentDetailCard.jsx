@@ -6,10 +6,13 @@ import Button from "./Button";
 import MDEditor from "@uiw/react-md-editor";
 import axios from "axios";
 import { DateTime } from "luxon";
+import Input from "./Input";
+import { string } from "yup";
 
 const AssignmentDetailCard = (props) => {
   const [showPopup, updatePopoup] = useState(false);
   const [submissionLink, setSubmissionLink] = useState("");
+  const [submissionLinkError, setSubmissionLinkError] = useState("");
 
   const ShowPopup = () => {
     updatePopoup(true);
@@ -24,16 +27,25 @@ const AssignmentDetailCard = (props) => {
   };
 
   const submitAssignment = () => {
+    const urlValidator = string().url("url is not valid");
+    try {
+      urlValidator.validateSync(submissionLink);
+      setSubmissionLinkError("");
+    } catch (e) {
+      setSubmissionLinkError(e.message);
+      return;
+    }
     axios.put(
       `https://api.codeyogi.io/assignment/${props.selectedAssignment.id}/submit `,
       { submissionLink },
       { withCredentials: true }
     );
+    setSubmissionLink("");
   };
   const assignmentDueDateString = props.selectedAssignment.due_date;
   const assignmentDueDateObject = DateTime.fromISO(assignmentDueDateString);
   const assignmentDueDateHumanReadableForm =
-    assignmentDueDateObject.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY);
+    assignmentDueDateObject.toFormat("ccc LLL dd y");
 
   return (
     <div className="rounded-md border-black border">
@@ -67,7 +79,8 @@ const AssignmentDetailCard = (props) => {
             <hr className="bt-2" />
             <div className="flex space-x-7">
               <H3> Submission Link</H3>
-              <input
+              <Input
+                error={submissionLinkError}
                 value={submissionLink}
                 onChange={onInputChange}
                 className="p-2 rounded-md border border-indigo-500"
