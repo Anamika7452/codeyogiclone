@@ -3,23 +3,20 @@ import H1 from "./H1";
 import SecondaryCard from "./SecondaryCard";
 import AssignmentCard from "./AssignmentCard";
 import { useEffect, useState } from "react";
-import axios from "axios";
-import { DateTime } from "luxon";
+import { getAssignments } from "./Api";
 
 const AssignmentsList = (props) => {
-  const [assignments, setAssignments] = useState([]);
+  const cachedAssignments =
+    JSON.parse(localStorage.getItem("assignments")) || [];
+  const [assignments, setAssignments] = useState(cachedAssignments);
 
   useEffect(() => {
-    const assignmentData = axios.get(
-      `https://api.codeyogi.io/batches/1/assignments`,
-      {
-        withCredentials: true,
-      }
-    );
-    assignmentData.then((response) => {
-      setAssignments(response.data);
+    const assignmentData = getAssignments();
+    assignmentData.then((assignments) => {
+      setAssignments(assignments);
     });
   }, []);
+
   return (
     <>
       <div className="mt-20 sm:mt-0">

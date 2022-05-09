@@ -1,22 +1,18 @@
 import React from "react";
 import H1 from "./H1";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import LectureCard from "./LectureCard";
 import SecondaryCard from "./SecondaryCard";
+import { getLectures } from "./Api";
 
 const LecturesList = (props) => {
-  const [lectures, setLectures] = useState([]);
+  const cachedLectures = JSON.parse(localStorage.getItem("lectures")) || [];
+  const [lectures, setLectures] = useState(cachedLectures);
 
   useEffect(() => {
-    const assignmentDetailData = axios.get(
-      `https://api.codeyogi.io/batches/1/sessions`,
-      {
-        withCredentials: true,
-      }
-    );
-    assignmentDetailData.then((response) => {
-      setLectures(response.data);
+    const lectureData = getLectures();
+    lectureData.then((lectures) => {
+      setLectures(lectures);
     });
   }, []);
 
