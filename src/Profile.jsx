@@ -1,15 +1,60 @@
 import React from "react";
-import MainLayout from "./MainLayout";
 import H1 from "./H1";
 import SecondaryCard from "./SecondaryCard";
 import Input from "./Input";
 import H3 from "./H3";
 import Button from "./Button";
+import { useFormik } from "formik";
+import { DateTime } from "luxon";
 
-const Profile = (props) => {
+const Profile = ({ myInfo }) => {
+  console.log(
+    "FirstName",
+    myInfo.data.first_name,
+    " LastName",
+    myInfo.data.last_name,
+    " EmailAddress",
+    myInfo.data.email,
+    " InstituteName",
+    myInfo.data.institute.name,
+    " YearOfPassout",
+    myInfo.data.year_of_pass_out,
+    " PhoneNumber",
+    myInfo.data.phone_no,
+    "  DOB",
+    myInfo.data.date_of_birth,
+    " Device",
+    myInfo.data.work_device,
+    " InstituteRollNo",
+    myInfo.data.institute_roll_no,
+    " Branch",
+    myInfo.data.branch
+  );
+  const DOBString = myInfo.data.date_of_birth;
+  const DOBObject = DateTime.fromISO(DOBString);
+  const DOBHumanReadableForm = DOBObject.toFormat("dd-MM-y");
+
+  const onSubmit = (values) => {};
+  const initialValues = {
+    FirstName: myInfo.data.first_name,
+    LastName: myInfo.data.last_name,
+    EmailAddress: myInfo.data.email,
+    InstituteName: myInfo.data.institute.name,
+    YearOfPassout: myInfo.data.year_of_pass_out || "",
+    PhoneNumber: myInfo.data.phone_no,
+    DOB: DOBHumanReadableForm,
+    Device: myInfo.data.work_device,
+    InstituteRollNo: myInfo.data.institute_roll_no || "",
+    Branch: myInfo.data.branch,
+  };
+
+  const { handleSubmit, handleChange, values } = useFormik({
+    initialValues,
+    onSubmit,
+  });
   return (
     <>
-      <div className="mt-20 sm:mt-0">
+      <form onSubmit={handleSubmit} className="mt-20 sm:mt-0">
         <SecondaryCard>
           <div className="p-5">
             <H1>Personal details</H1>
@@ -20,7 +65,11 @@ const Profile = (props) => {
                 <span className="text-red-500 text-lg">*</span>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.FirstName}
+                  name="FirstName"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -32,7 +81,11 @@ const Profile = (props) => {
                 </span>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.LastName}
+                  name="LastName"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -41,7 +94,11 @@ const Profile = (props) => {
                 <H3>Email address</H3>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.EmailAddress}
+                  name="EmailAddress"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -51,7 +108,11 @@ const Profile = (props) => {
                 <span className="text-red-500 text-lg">*</span>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.InstituteName}
+                  name="InstituteName"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -60,7 +121,11 @@ const Profile = (props) => {
                 <H3>Year Of Passout</H3>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.YearOfPassout}
+                  name="YearOfPassout"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -70,7 +135,11 @@ const Profile = (props) => {
                 <span className="text-red-500 text-lg">*</span>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.PhoneNumber}
+                  name="PhoneNumber"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -80,7 +149,7 @@ const Profile = (props) => {
                 <span className="text-red-500 text-lg">*</span>
               </div>
               <div>
-                <Input />
+                <Input value={values.DOB} name="DOB" onChange={handleChange} />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -90,7 +159,11 @@ const Profile = (props) => {
                 <span className="text-red-500 text-lg">*</span>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.Device}
+                  name="Device"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -99,7 +172,11 @@ const Profile = (props) => {
                 <H3>Institute roll no.</H3>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.InstituteRollNo}
+                  name="InstituteRollNo"
+                  onChange={handleChange}
+                />
               </div>
             </div>
             <hr className="m-2 border" />
@@ -108,7 +185,11 @@ const Profile = (props) => {
                 <H3>Branch</H3>
               </div>
               <div>
-                <Input />
+                <Input
+                  value={values.Branch}
+                  name="Branch"
+                  onChange={handleChange}
+                />
               </div>
             </div>
           </div>
@@ -116,7 +197,7 @@ const Profile = (props) => {
             <Button>Update</Button>
           </div>
         </SecondaryCard>
-      </div>
+      </form>
     </>
   );
 };

@@ -67,7 +67,7 @@ const SideBar = (props) => {
           </div>
         </div>
         <div>
-          <div onClick={() => navigate(`/profile`)}>
+          <div onClick={() => navigate(`/ProfilePage`)}>
             <div
               onClick={props.onChange}
               className="flex space-x-2 hover:bg-gray-900 p-2 rounded-md"

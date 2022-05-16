@@ -9,11 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { DateTime } from "luxon";
 import Input from "./Input";
 import { string } from "yup";
+import { useFormik } from "formik";
 
 const AssignmentCard = (props) => {
   const [showPopup, updatePopoup] = useState(false);
-  const [submissionLink, setSubmissionLink] = useState("");
-  const [submissionLinkError, setSubmissionLinkError] = useState("");
+  // const [submissionLink, setSubmissionLink] = useState("");
+  // const [submissionLinkError, setSubmissionLinkError] = useState("");
 
   const Showpopup = () => {
     updatePopoup(true);
@@ -23,28 +24,37 @@ const AssignmentCard = (props) => {
     updatePopoup(false);
   };
 
-  const onInputChange = (event) => {
-    if (event.target.value) {
-      setSubmissionLink(event.target.value);
-    }
-  };
+  // // const handleChange = (event) => {
+  // //   if (event.target.value) {
+  // //     setSubmissionLink(event.target.value);
+  // //   }
+  // // };
 
-  const submitAssignment = () => {
-    const urlValidator = string().url("url is not valid");
-    try {
-      urlValidator.validateSync(submissionLink);
-      setSubmissionLinkError("");
-    } catch (e) {
-      setSubmissionLinkError(e.message);
-      return;
-    }
-    axios.put(
-      `https://api.codeyogi.io/assignment/${props.assignment.id}/submit `,
-      { submissionLink },
-      { withCredentials: true }
-    );
-    setSubmissionLink("");
-  };
+  // const onSubmit = (values) => {
+  //   // const urlValidator = string().url("url is not valid");
+  //   // try {
+  //   //   urlValidator.validateSync(submissionLink);
+  //   //   setSubmissionLinkError("");
+  //   // } catch (e) {
+  //   //   setSubmissionLinkError(e.message);
+  //   //   return;
+  //   // }
+
+  //   const { handleSubmit, handleChange, values } = useFormik({
+  //     initialValues: {
+  //       submissionLink: "",
+  //     },
+  //     onSubmit,
+  //   });
+
+  //   axios.put(
+  //     `https://api.codeyogi.io/assignment/${props.assignment.id}/submit `,
+  //     { submissionLink },
+  //     { withCredentials: true }
+  //   );
+  //   // setSubmissionLink("");
+  //   Hidepopup();
+  // };
   const assignmentUplodedDateString = props.assignment.updated_at;
   const asignmentUplodedDateObject = DateTime.fromISO(
     assignmentUplodedDateString
@@ -101,26 +111,30 @@ const AssignmentCard = (props) => {
         </Card>
         <div>
           {showPopup && (
-            <div className="h-screen absolute flex -translation-x-1/2 -translation-y-1/2 top-1/2 left-1/2">
+            <form
+              // onSubmit={handleSubmit}
+              className="h-screen absolute flex -translation-x-1/2 -translation-y-1/2 top-1/2 left-1/2"
+            >
               <div className="absolute p-5 w-96 rounded-md bg-gray-200 space-y-4">
                 <hr className="bt-2" />
                 <div className="flex space-x-7">
                   <H3> Submission Link</H3>
                   <Input
-                    error={submissionLinkError}
-                    value={submissionLink}
-                    onChange={onInputChange}
+                    // // error={submissionLinkError}
+                    // value={values.submissionLink}
+                    // name="submissionLink"
+                    // onChange={handleChange}
                     className="p-2 rounded-md border border-indigo-500"
                     type="text"
                   />
                 </div>
                 <hr className="bt-2" />
                 <div className="space-x-4">
-                  <Button onClick={submitAssignment}>Submit</Button>
-                  <Button onClick={Hidepopup}>close</Button>
+                  <Button onClick={Showpopup}>Submit</Button>
+                  <Button onClick={Hidepopup}>Cancel</Button>
                 </div>
               </div>
-            </div>
+            </form>
           )}
         </div>
       </div>

@@ -28,6 +28,15 @@ export const getStudents = async (page) => {
   }
 };
 
+export const getMyInfo = async () => {
+  const myInfoResponsePromise = await axios.get(API_BASE_URL + `me`, {
+    withCredentials: true,
+  });
+  const myInfo = myInfoResponsePromise.data;
+  // cachedData(myInfo, "myInfo");
+  return myInfo;
+};
+
 export const getLectures = async () => {
   try {
     const lecturesResponsePromise = await axios.get(

@@ -2,48 +2,37 @@ import React, { useState } from "react";
 import Input from "./Input";
 import Button from "./Button";
 import { MdComputer } from "react-icons/md";
-import { string } from "yup";
+import { object, string } from "yup";
 import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 
 const LoginPage = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
 
-  const handelEmailChange = (event) => {
-    setEmail(event.target.value);
+  const onSubmit = (values) => {
+    console.log(`hello`, values);
   };
 
-  const handelPasswordChange = (event) => {
-    setPassword(event.target.value);
+  const validationSchema = object().shape({
+    email: string().email(),
+    password: string().min(8),
+  });
+
+  const initialValues = {
+    email: "",
+    password: "",
   };
 
-  const attemptLogin = (event) => {
-    const emailValidator = string().email("email is not valid");
-    const passwordValidator = string().min(
-      8,
-      "password must be 8 character long"
-    );
-    try {
-      emailValidator.validateSync(email);
-      setEmailError("");
-    } catch (e) {
-      setEmailError(e.message);
-      return;
-    }
-    try {
-      passwordValidator.validateSync(password);
-      setPasswordError("");
-    } catch (e) {
-      setPasswordError(e.message);
-      return;
-    }
-  };
-
+  const { handleSubmit, handleChange, values, errors } = useFormik({
+    initialValues,
+    onSubmit,
+    validationSchema,
+  });
   return (
-    <div className="space-y-4 flex justify-center sm:px-96 px-10 h-screen flex-col">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 flex justify-center sm:px-96 px-10 h-screen flex-col"
+    >
       <h1
         onClick={() => navigate(`/lectures`)}
         className="text-8xl flex justify-center font-bold "
@@ -54,21 +43,22 @@ const LoginPage = () => {
         Sign in to your Account
       </h1>
       <Input
-        error={emailError}
-        type="text"
-        value={email}
-        onChange={handelEmailChange}
-        placeHolder="email"
+        error={errors.email}
+        name="email"
+        value={values.email}
+        onChange={handleChange}
+        placeholder="email"
       />
       <Input
-        error={passwordError}
+        error={errors.password}
+        name="password"
         type="password"
-        value={password}
-        onChange={handelPasswordChange}
-        placeHolder="email"
+        value={values.password}
+        onChange={handleChange}
+        placeholder="password"
       />
-      <Button onClick={attemptLogin}>login</Button>
-    </div>
+      <Button>login</Button>
+    </form>
   );
 };
 export default LoginPage;

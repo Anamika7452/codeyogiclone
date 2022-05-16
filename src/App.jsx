@@ -2,7 +2,7 @@ import React from "react";
 import AssignmentsList from "./AssignmentsList";
 import LecturesList from "./LecturesList";
 import Quiz from "./Quiz";
-import Profile from "./Profile";
+import ProfilePage from "./ProfilePage";
 import MainLayout from "./MainLayout";
 import NotFoundPage from "./NotFoundPage";
 import AssignmentDetailList from "./AssignmentDetailList";
@@ -26,7 +26,7 @@ const App = () => {
               />
 
               <Route path="lectures" element={<LecturesList />} />
-              <Route path="profile" element={<Profile />} />
+              <Route path="ProfilePage" element={<ProfilePage />} />
               <Route path="students" element={<StudentList />} />
             </Route>
             <Route path="quiz" element={<Quiz />} />
