@@ -3,11 +3,10 @@ import H1 from "./H1";
 import SecondaryCard from "./SecondaryCard";
 import AssignmentCard from "./AssignmentCard";
 import { useEffect, useState } from "react";
-import { getAssignments } from "./Api";
+import { getAssignments, getCachedData } from "./Api";
 
 const AssignmentsList = (props) => {
-  const cachedAssignments =
-    JSON.parse(localStorage.getItem("assignments")) || [];
+  const cachedAssignments = getCachedData("assignments") || [];
   const [assignments, setAssignments] = useState(cachedAssignments);
 
   useEffect(() => {

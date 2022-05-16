@@ -1,43 +1,95 @@
 import axios from "axios";
 
-export const getStudents = () => {
-  const studentsResponsePromise = axios.get(
-    `https://randomuser.me/api?results=9`
-  );
-  const studentsPromise = studentsResponsePromise.then((response) => {
-    const students = response.data.results;
-    localStorage.setItem("students", JSON.stringify(students));
+const API_BASE_URL = "https://api.codeyogi.io/";
+
+const cachedData = (data, key) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+
+export const getCachedData = (key) => {
+  return JSON.parse(localStorage.getItem(key));
+};
+
+const handleError = (e) => {
+  console.error(`error is`, e);
+  return [];
+};
+
+export const getStudents = async (page) => {
+  try {
+    const studentsResponsePromise = await axios.get(
+      `https://randomuser.me/api?results=9&page=${page}`
+    );
+    const students = studentsResponsePromise.data.results;
+    cachedData(students, "students");
     return students;
-  });
-  return studentsPromise;
+  } catch (e) {
+    handleError(e);
+  }
 };
 
-export const getLectures = () => {
-  const lecturesResponsePromise = axios.get(
-    `https://api.codeyogi.io/batches/1/sessions`,
-    {
-      withCredentials: true,
-    }
-  );
-  const lecturesPromise = lecturesResponsePromise.then((response) => {
-    const lectures = response.data;
-    localStorage.setItem("lectures", JSON.stringify(lectures));
+export const getLectures = async () => {
+  try {
+    const lecturesResponsePromise = await axios.get(
+      API_BASE_URL + `batches/1/sessions`,
+      {
+        withCredentials: true,
+      }
+    );
+    const lectures = lecturesResponsePromise.data;
+    cachedData(lectures, "lectures");
     return lectures;
-  });
-  return lecturesPromise;
+  } catch (e) {
+    handleError(e);
+  }
 };
 
-export const getAssignments = () => {
-  const assignmentsResponsePromise = axios.get(
-    `https://api.codeyogi.io/batches/1/assignments`,
-    {
-      withCredentials: true,
-    }
-  );
-  const assignmentsPromise = assignmentsResponsePromise.then((response) => {
-    const assignments = response.data;
-    localStorage.setItem("assignments", JSON.stringify(assignments));
+export const getAssignments = async () => {
+  try {
+    const assignmentsResponsePromise = await axios.get(
+      API_BASE_URL + `batches/1/assignments`,
+      {
+        withCredentials: true,
+      }
+    );
+    const assignments = assignmentsResponsePromise.data;
+    cachedData(assignments, "assignments");
     return assignments;
-  });
-  return assignmentsPromise;
+  } catch (e) {
+    handleError(e);
+  }
+};
+
+export const getAssignmentDetail = async (selectedId) => {
+  try {
+    const assignmentDetailResponsePromise = await axios.get(
+      API_BASE_URL +
+        `assignments/${selectedId}
+`,
+      {
+        withCredentials: true,
+      }
+    );
+    const assignmentDetail = assignmentDetailResponsePromise.data;
+    cachedData(assignmentDetail, "assignmentDetail");
+    return assignmentDetail;
+  } catch (e) {
+    handleError(e);
+  }
+};
+
+export const submitAssignment = (submissionLink) => {
+  const urlValidator = string().url("url is not valid");
+  try {
+    urlValidator.validateSync(submissionLink);
+    setSubmissionLinkError("");
+  } catch (e) {
+    setSubmissionLinkError(e.message);
+    return;
+  }
+  axios.put(
+    `https://api.codeyogi.io/assignment/${props.assignment.id}/submit `,
+    { submissionLink },
+    { withCredentials: true }
+  );
 };

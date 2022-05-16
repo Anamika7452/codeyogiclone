@@ -3,10 +3,10 @@ import H1 from "./H1";
 import { useEffect, useState } from "react";
 import LectureCard from "./LectureCard";
 import SecondaryCard from "./SecondaryCard";
-import { getLectures } from "./Api";
+import { getLectures, getCachedData } from "./Api";
 
 const LecturesList = (props) => {
-  const cachedLectures = JSON.parse(localStorage.getItem("lectures")) || [];
+  const cachedLectures = getCachedData("lectures") || [];
   const [lectures, setLectures] = useState(cachedLectures);
 
   useEffect(() => {

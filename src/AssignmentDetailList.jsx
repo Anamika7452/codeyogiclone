@@ -1,26 +1,23 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import AssignmentDetailCard from "./AssignmentDetailCard";
 import { useParams } from "react-router-dom";
-
+import { getAssignmentDetail, getCachedData } from "./Api";
 const AssignmentDetailList = (props) => {
-  const [assignmentdetail, setAssignmentDetail] = useState([]);
+  const cachedAssignmentDetail = getCachedData("assignmentDetail") || [];
+
+  const [assignmentdetail, setAssignmentDetail] = useState(
+    cachedAssignmentDetail
+  );
 
   const data = useParams();
 
   const selectedId = +data.id;
 
   useEffect(() => {
-    const assignmentDetailData = axios.get(
-      ` https://api.codeyogi.io/assignments/${selectedId}
-`,
-      {
-        withCredentials: true,
-      }
-    );
-    assignmentDetailData.then((response) => {
-      setAssignmentDetail(response.data);
+    const assignmentDetailData = getAssignmentDetail(selectedId);
+    assignmentDetailData.then((assignmentDetail) => {
+      setAssignmentDetail(assignmentDetail);
     });
   }, []);
 
