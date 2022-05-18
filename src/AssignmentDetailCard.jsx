@@ -4,15 +4,14 @@ import { useState } from "react";
 import Card from "./Card";
 import Button from "./Button";
 import MDEditor from "@uiw/react-md-editor";
-import axios from "axios";
 import { DateTime } from "luxon";
-import Input from "./Input";
+import SubmissionInput from "./SubmissionInput";
 import { string } from "yup";
+import { submitAssignment } from "./Api";
+import { useFormik } from "formik";
 
 const AssignmentDetailCard = (props) => {
   const [showPopup, updatePopoup] = useState(false);
-  const [submissionLink, setSubmissionLink] = useState("");
-  const [submissionLinkError, setSubmissionLinkError] = useState("");
 
   const ShowPopup = () => {
     updatePopoup(true);
@@ -22,26 +21,18 @@ const AssignmentDetailCard = (props) => {
     updatePopoup(false);
   };
 
-  const onInputChange = (event) => {
-    setSubmissionLink(event.target.value);
+  const onSubmit = (values) => {
+    submitAssignment(values.submissionLink, props.selectedAssignment.id);
+    Hidepopup();
   };
 
-  const submitAssignment = () => {
-    const urlValidator = string().url("url is not valid");
-    try {
-      urlValidator.validateSync(submissionLink);
-      setSubmissionLinkError("");
-    } catch (e) {
-      setSubmissionLinkError(e.message);
-      return;
-    }
-    axios.put(
-      `https://api.codeyogi.io/assignment/${props.selectedAssignment.id}/submit `,
-      { submissionLink },
-      { withCredentials: true }
-    );
-    setSubmissionLink("");
-  };
+  const { handleSubmit, handleChange, values } = useFormik({
+    initialValues: {
+      submissionLink: "",
+    },
+    onSubmit,
+  });
+
   const assignmentDueDateString = props.selectedAssignment.due_date;
   const assignmentDueDateObject = DateTime.fromISO(assignmentDueDateString);
   const assignmentDueDateHumanReadableForm =
@@ -74,27 +65,30 @@ const AssignmentDetailCard = (props) => {
         </div>
       </Card>
       {showPopup && (
-        <div className="h-screen absolute flex -translation-x-1/2 -translation-y-1/2 top-1/2 left-1/2">
+        <form
+          onSubmit={handleSubmit}
+          className="h-screen absolute flex -translation-x-1/2 -translation-y-1/2 top-1/2 left-1/2"
+        >
           <div className="absolute p-5 w-96 rounded-md bg-gray-200 space-y-4">
             <hr className="bt-2" />
             <div className="flex space-x-7">
               <H3> Submission Link</H3>
-              <Input
-                error={submissionLinkError}
-                value={submissionLink}
-                onChange={onInputChange}
+              <SubmissionInput
+                value={values.submissionLink}
+                name="submissionLink"
+                onChange={handleChange}
                 className="p-2 rounded-md border border-indigo-500"
                 type="text"
               />
             </div>
             <hr className="bt-2" />
             <div className="space-x-4">
-              <Button onClick={submitAssignment}>Submit</Button>
+              <Button>Submit</Button>
 
               <Button onClick={Hidepopup}>close</Button>
             </div>
           </div>
-        </div>
+        </form>
       )}
     </div>
   );

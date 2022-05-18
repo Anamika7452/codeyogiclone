@@ -87,17 +87,9 @@ export const getAssignmentDetail = async (selectedId) => {
   }
 };
 
-export const submitAssignment = (submissionLink) => {
-  const urlValidator = string().url("url is not valid");
-  try {
-    urlValidator.validateSync(submissionLink);
-    setSubmissionLinkError("");
-  } catch (e) {
-    setSubmissionLinkError(e.message);
-    return;
-  }
-  axios.put(
-    `https://api.codeyogi.io/assignment/${props.assignment.id}/submit `,
+export const submitAssignment = async (submissionLink, id) => {
+  await axios.put(
+    `https://api.codeyogi.io/assignment/${id}/submit `,
     { submissionLink },
     { withCredentials: true }
   );
