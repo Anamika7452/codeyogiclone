@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import H1 from "./H1";
 import SecondaryCard from "./SecondaryCard";
 import Input from "./Input";
@@ -6,54 +6,51 @@ import H3 from "./H3";
 import Button from "./Button";
 import { Formik, Form } from "formik";
 import { DateTime } from "luxon";
-import { AlertContext } from "./AlertContext";
 
 const Profile = ({ myInfo }) => {
-  const { showAlert } = useContext(AlertContext);
-  console.log(
-    "FirstName",
-    myInfo.data.first_name,
-    " LastName",
-    myInfo.data.last_name,
-    " EmailAddress",
-    myInfo.data.email,
-    " InstituteName",
-    myInfo.data.institute.name,
-    " YearOfPassout",
-    myInfo.data.year_of_pass_out,
-    " PhoneNumber",
-    myInfo.data.phone_no,
-    "  DOB",
-    myInfo.data.date_of_birth,
-    " Device",
-    myInfo.data.work_device,
-    " InstituteRollNo",
-    myInfo.data.institute_roll_no,
-    " Branch",
-    myInfo.data.branch
-  );
-  const DOBString = myInfo.data.date_of_birth;
-  const DOBObject = DateTime.fromISO(DOBString);
-  const DOBHumanReadableForm = DOBObject.toFormat("dd-MM-y");
+  const onSubmit = (values) => {};
+  let initialValues = {};
+  if (myInfo) {
+    console.log("helloe helloe", myInfo.data.first_name);
+    console.log(
+      "FirstName",
+      myInfo.data.first_name,
+      " LastName",
+      myInfo.data.last_name,
+      " EmailAddress",
+      myInfo.data.email,
+      " InstituteName",
+      myInfo.data.institute.name,
+      " YearOfPassout",
+      myInfo.data.year_of_pass_out,
+      " PhoneNumber",
+      myInfo.data.phone_no,
+      "  DOB",
+      myInfo.data.date_of_birth,
+      " Device",
+      myInfo.data.work_device,
+      " InstituteRollNo",
+      myInfo.data.institute_roll_no,
+      " Branch",
+      myInfo.data.branch
+    );
+    const DOBString = myInfo.data.date_of_birth;
+    const DOBObject = DateTime.fromISO(DOBString);
+    const DOBHumanReadableForm = DOBObject.toFormat("dd-MM-y");
 
-  const onSubmit = (value) => {
-    // console.log(`value is`, value);
-    // showAlert("Updated sucessfully");
-    // console.log(showAlert);
-  };
-
-  const initialValues = {
-    FirstName: myInfo.data.first_name,
-    LastName: myInfo.data.last_name,
-    EmailAddress: myInfo.data.email,
-    InstituteName: myInfo.data.institute.name,
-    YearOfPassout: myInfo.data.year_of_pass_out || "",
-    PhoneNumber: myInfo.data.phone_no,
-    DOB: DOBHumanReadableForm,
-    Device: myInfo.data.work_device,
-    InstituteRollNo: myInfo.data.institute_roll_no || "",
-    Branch: myInfo.data.branch,
-  };
+    initialValues = {
+      FirstName: myInfo.data.first_name,
+      LastName: myInfo.data.last_name,
+      EmailAddress: myInfo.data.email,
+      InstituteName: myInfo.data.institute.name,
+      YearOfPassout: myInfo.data.year_of_pass_out || "",
+      PhoneNumber: myInfo.data.phone_no,
+      DOB: DOBHumanReadableForm,
+      Device: myInfo.data.work_device,
+      InstituteRollNo: myInfo.data.institute_roll_no || "",
+      Branch: myInfo.data.branch,
+    };
+  }
   return (
     <>
       <Formik
