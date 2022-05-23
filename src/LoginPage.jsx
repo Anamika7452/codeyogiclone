@@ -10,11 +10,11 @@ import { AlertContext } from "./AlertContext";
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const { setMessage } = useContext(AlertContext);
+  const { showAlert } = useContext(AlertContext);
 
   const onSubmit = (value) => {
     console.log(`value is`, value);
-    setMessage("Login Successful ");
+    showAlert("Login Successful");
   };
 
   const validationSchema = object().shape({

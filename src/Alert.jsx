@@ -1,25 +1,29 @@
-import React, { useContext } from "react";
-import { AlertContext } from "./AlertContext";
+import React from "react";
+import classNames from "classnames";
 
-const Alert = () => {
-  const alert = useContext(AlertContext);
+const Alert = ({ alert, removeAlert }) => {
+  let { type, message } = alert;
+
+  const alertClasses = classNames(
+    "text-white border text-2xl max-w-sm px-2 py-5 mx-auto h-20 opacity-70 font-medium  rounded-lg ",
+    {
+      "bg-red-500 border-red-800 ": type === "error",
+      "bg-green-500 border-green-800 ": type === "success",
+      "bg-yellow-500 border-yellow-800 ": type === "warning",
+    }
+  );
   return (
     <>
-      {alert.message && (
-        <div className="bg-green-500 h-36 items-center w-96 opacity-70 rounded-lg h-screen mt-16 absolute justify-between flex -right-1/4 -translation-y-1/2  left-1/4">
-          <div className="text-white text-2xl font-medium p-5">
-            {alert.message}
-          </div>
-          <button
-            onClick={() => {
-              alert.setMessage("");
-            }}
-            className="text-white text-2xl font-medium p-5"
-          >
-            X
-          </button>
-        </div>
-      )}
+      <div className={alertClasses}>
+        <span className=" mr-40">{message}</span>
+        <button
+          onClick={() => {
+            removeAlert(alert);
+          }}
+        >
+          X
+        </button>
+      </div>
     </>
   );
 };

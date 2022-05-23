@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import H1 from "./H1";
 import SecondaryCard from "./SecondaryCard";
 import Input from "./Input";
@@ -6,8 +6,10 @@ import H3 from "./H3";
 import Button from "./Button";
 import { Formik, Form } from "formik";
 import { DateTime } from "luxon";
+import { AlertContext } from "./AlertContext";
 
 const Profile = ({ myInfo }) => {
+  const { showAlert } = useContext(AlertContext);
   console.log(
     "FirstName",
     myInfo.data.first_name,
@@ -34,7 +36,12 @@ const Profile = ({ myInfo }) => {
   const DOBObject = DateTime.fromISO(DOBString);
   const DOBHumanReadableForm = DOBObject.toFormat("dd-MM-y");
 
-  const onSubmit = (values) => {};
+  const onSubmit = (value) => {
+    // console.log(`value is`, value);
+    // showAlert("Updated sucessfully");
+    // console.log(showAlert);
+  };
+
   const initialValues = {
     FirstName: myInfo.data.first_name,
     LastName: myInfo.data.last_name,
